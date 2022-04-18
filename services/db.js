@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 const logger = require('../logger')
 
 async function query(sql, params) {
-  logger.info("Start query")
+  logger.info("Start query ", process.env.DBHOST, process.env.DBUSER, process.env.DBPASSWORD, process.env.DBDATABASE)
   const connection = await mysql.createConnection({
     host: process.env.DBHOST,
     user: process.env.DBUSER,
