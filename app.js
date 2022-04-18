@@ -21,6 +21,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/data', express.static(process.env.IMAGEPATH || '../blog_images'));
 app.use(express.static(process.env.BUILDPATH || '../maespecial_webpage/build'));
 app.use('/api/admin', admin);
-// app.use('/api/anony', anonymous);
+app.use('/api/anony', anonymous);
 
 module.exports = app;
