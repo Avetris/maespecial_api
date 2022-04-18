@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/post', async (req, res) => {
     try {
-        res.json(await post.getMultiple(req.query.page));
+        res.json(await post.getMultiple(0));
     } catch (err) {
         console.error(`Error while getting post `, err.message);
     }
