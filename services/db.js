@@ -10,11 +10,13 @@ async function query(sql, params) {
     password: process.env.DBPASSWORD,
     database: process.env.DBDATABASE
   });
-  connection.connect();
+  // connection.connect();
 
-  logger.info("Middle query ", connection)
+  logger.info("Middle query ")
+  logger.info(connection)
   const [results, ] = await connection.execute(sql, params);
-  logger.info("End query ", result)
+  logger.info("End query ")
+  logger.info(results)
 
   return results;
 }
