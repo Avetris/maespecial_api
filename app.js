@@ -4,17 +4,26 @@ const cors = require('cors');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var admin = require('./router/admin');
 var anonymous = require('./router/anonymous');
 const app = express();
+require("./.env")
 
 app.use(fileUpload({
     createParentPath: true
 }));
 
+app.use(session({
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: true
+}));
 
-app.use(cors());
+app.use(cors({origin: [
+    "http://localhost:4100"
+  ], credentials: true}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
