@@ -8,8 +8,16 @@ function emptyOrRows(rows) {
     }
     return rows;
 }
+
+function emptyOrUnique(rows) {
+    if (!rows) {
+        return null;
+    }
+    return rows[0];
+}
   
 module.exports = {
     getOffset,
-    emptyOrRows
+    emptyOrRows,
+    emptyOrUnique
 }

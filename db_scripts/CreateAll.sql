@@ -18,7 +18,7 @@ CREATE TABLE `post` (
 	`description` TEXT NOT NULL COLLATE 'utf16_general_ci',
 	`image` VARCHAR(50) NOT NULL DEFAULT '0' COLLATE 'utf16_general_ci',
 	`content` TEXT NOT NULL COLLATE 'utf16_general_ci',
-	`publish_date` DATETIME NOT NULL,
+	`publishDate` DATETIME NOT NULL,
 	PRIMARY KEY (`id`) USING BTREE
 )
 COLLATE='utf8mb3_general_ci'
