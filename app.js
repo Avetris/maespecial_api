@@ -10,15 +10,12 @@ var admin = require('./router/admin');
 var anonymous = require('./router/anonymous');
 const app = express();
 
-
-require("./.env")
-
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 if (process.env.NODE_ENV == 'production') {
     app.unsubscribe(cors())
 } else {
+    require("./.env")
     app.use(cors({
         origin: [
             "http://localhost:4100"

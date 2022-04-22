@@ -3,11 +3,12 @@ const helper = require('../helper');
 const jsdom = require("jsdom");
 const fs = require('fs');
 
-async function getMultiple(pageSize = process.env.LISTPERPAGE, page = 0)
+async function getMultiple(showall, pageSize = process.env.LISTPERPAGE, page = 0)
 {
   const offset = helper.getOffset(Number(page) + 1, pageSize);
   const rows = await db.query(
-    `SELECT id, title, description, image, publishDate FROM post LIMIT ${offset},${pageSize}`
+    `SELECT id, title, description, image, publishDate FROM post 
+    ${!showall ? 'WHERE publishDate < NOW() ' : ''}ORDER BY publishDate DESC, id ASC LIMIT ${offset},${pageSize}`
   );
   const data = helper.emptyOrRows(rows);
 

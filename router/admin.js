@@ -78,6 +78,14 @@ router.delete('/resources/:id', auth, async (req, res) =>
     }
 });
 
+router.get('/posts', async (req, res) => {
+    try {
+        res.json(await post.getMultiple(true, req.query.pageSize, req.query.page));
+    } catch (err) {
+        console.error(`Error while getting posts `, err.message);
+    }
+});
+
 router.post('/post', auth, async (req, res) =>
 {
     try {
