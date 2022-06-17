@@ -46,7 +46,10 @@ router.get('/resources', auth, async (req, res) =>
     try {
         res.json(await resources.getAll());
     } catch (err) {
-        logger.error(`Error while getting all resources `, err.message);
+        logger.error(`Error while getting all resources `, err);
+        res.status(400).send({
+            error: "Error while getting all resources"
+        });
     }
 });
 
@@ -55,7 +58,10 @@ router.post('/resources', auth, async (req, res) =>
     try {
         res.json(await resources.create(req.body));
     } catch (err) {
-        logger.error(`Error while creating resources `, err.message);
+        logger.error(`Error while creating resources `, err);
+        res.status(400).send({
+            error: "Error while creating resource"
+        });
     }
 });
 
@@ -64,17 +70,47 @@ router.put('/resources', auth, async (req, res) =>
     try {
         res.json(await resources.update(req.body));
     } catch (err) {
-        logger.error(`Error while updating resources ${req.body.id}`, err.message);
+        logger.error(`Error while updating resources ${req.body.id}`, err);
+        res.status(400).send({
+            error: "Error while removing resource"
+        });
     }
 });
-
 
 router.delete('/resources/:id', auth, async (req, res) =>
 {
     try {
         res.json(await resources.remove(req.params.id));
     } catch (err) {
-        logger.error(`Error while removing resource ${req.params.id}`, err.message);
+        logger.error(`Error while removing resource ${req.params.id}`, err);
+        res.status(400).send({
+            error: "Error while removing resource"
+        });
+    }
+});
+
+
+router.post('/resources_image', auth, async (req, res) =>
+{
+    try {
+        res.json(await resources.createImage(req.body));
+    } catch (err) {
+        logger.error(`Error while creating resources image `, err);
+        res.status(400).send({
+            error: "Error while creating resources image"
+        });
+    }
+});
+
+router.delete('/resources_image', auth, async (req, res) =>
+{
+    try {
+        res.json(await resources.removeImage(req.body.resource_id, req.body.image_id));
+    } catch (err) {
+        logger.error(`Error while removing resource ${req.body.resource_id} image ${req.body.image_id}`, err);
+        res.status(400).send({
+            error: "Error while removing resources image"
+        });
     }
 });
 
@@ -82,7 +118,10 @@ router.get('/posts', async (req, res) => {
     try {
         res.json(await post.getMultiple(true, req.query.pageSize, req.query.page));
     } catch (err) {
-        console.error(`Error while getting posts `, err.message);
+        logger.error(`Error while getting posts `, err);
+        res.status(400).send({
+            error: "Error while getting posts"
+        });
     }
 });
 
@@ -91,7 +130,10 @@ router.post('/post', auth, async (req, res) =>
     try {
         res.json(await post.create(req.body));
     } catch (err) {
-        logger.error(`Error while creating post ${req.body.id}`, err.message);
+        logger.error(`Error while creating post ${req.body.id}`, err);
+        res.status(400).send({
+            error: "Error while creating post"
+        });
     }
 });
 
@@ -100,7 +142,10 @@ router.put('/post', auth, async (req, res) =>
     try {
         res.json(await post.update(req.body));
     } catch (err) {
-        logger.error(`Error while updating post ${req.body.id}`, err.message);
+        logger.error(`Error while updating post ${req.body.id}`, err);
+        res.status(400).send({
+            error: "Error while updating post"
+        });
     }
 });
 
@@ -109,8 +154,10 @@ router.delete('/post/:id', auth, async (req, res) =>
     try {
         res.json(await post.remove(req.params.id));
     } catch (err) {
-        logger.error(`Error while removing post ${req.params.id}`, err.message);
-        logger.error(err.message);
+        logger.error(`Error while removing post ${req.params.id}`, err);
+        res.status(400).send({
+            error: "Error while removing post"
+        });
     }
 });
 

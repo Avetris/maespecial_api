@@ -1,7 +1,6 @@
 var express = require('express');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
-var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -15,7 +14,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 if (process.env.NODE_ENV == 'production') {
     app.unsubscribe(cors())
 } else {
-    require("./.env")
+    require('dotenv').config()
     app.use(cors({
         origin: [
             "http://localhost:4100"
