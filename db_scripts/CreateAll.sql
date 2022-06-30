@@ -14,7 +14,7 @@ AUTO_INCREMENT=46
 
 CREATE TABLE `resources_image` (
 	`resource_id` INT(11) NOT NULL AUTO_INCREMENT,
-	`image_id` VARCHAR(15) NOT NULL AUTO_INCREMENT,
+	`image_id` VARCHAR(15) NOT NULL,
 	`image_path` VARCHAR(100) NOT NULL DEFAULT '' COLLATE 'utf16_general_ci',
 	PRIMARY KEY (`resource_id`, `image_id`) USING BTREE,
 	FOREIGN KEY (`resource_id`) REFERENCES resources(`id`) 
