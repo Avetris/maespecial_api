@@ -3,6 +3,7 @@ var router = express.Router();
 
 const post = require('../services/data_manager/post');
 const resources = require('../services/data_manager/resource');
+const game_manager = require('../services/data_manager/game_manager');
 
 const logger = require('../logger')
 
@@ -157,6 +158,20 @@ router.delete('/post/:id', auth, async (req, res) =>
         logger.error(`Error while removing post ${req.params.id}`, err);
         res.status(400).send({
             error: "Error while removing post"
+        });
+    }
+});
+
+
+
+router.put('/gameSettings', auth, async (req, res) =>
+{
+    try {
+        res.json(await game_manager.uploadGameSettings(JSON.stringify(req.body)));
+    } catch (err) {
+        logger.error(`Error while updating game setting`, err);
+        res.status(400).send({
+            error: "Error while updating game setting"
         });
     }
 });
