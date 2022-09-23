@@ -39,7 +39,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/data', express.static(process.env.IMAGEPATH || '../blog_images'));
-app.use('/game', express.static(process.env.GAMEPATH || '../game'));
 app.use(express.static(process.env.BUILDPATH || '../maespecial_webpage/build'));
 app.use('/api/admin', admin);
 app.use('/api/anony', anonymous);
