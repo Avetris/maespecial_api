@@ -43,7 +43,6 @@ router.get('/post/:id', async (req, res) => {
 
 router.get('/gameSettings', async (req, res) => {
     try {
-        console.log(req.query)
         res.json(await game_manager.getGameSettings(Date.parse(req.query.last_sync)));
     } catch (err) {
         logger.error(`Error while getting game settings `, err);
