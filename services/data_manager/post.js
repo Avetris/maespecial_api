@@ -33,8 +33,6 @@ async function getUnique(id)
 
 async function create(post)
 {
-  logger.info("create")
-  logger.info(post.publishDate)
   const result = await db.query(
     'INSERT INTO post (title, description, image, content, publishDate) VALUES (?, ?, ?, ?, NOW())',
     ["tmp", "tmp", "tmp", "tmp"]
@@ -46,8 +44,6 @@ async function create(post)
 
 async function update(post)
 {
-  logger.info("update")
-  logger.info(post.publishDate)
   const doc = new jsdom.JSDOM(post.content)
   doc.window.document.querySelectorAll("img").forEach(img =>
   {
