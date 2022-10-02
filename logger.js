@@ -1,7 +1,7 @@
 const winston = require('winston')
 
 const options = {
-  file: {
+  info: {
     level: 'info',
     filename: './logs/info.log',
     handleExceptions: true,
@@ -10,7 +10,7 @@ const options = {
     maxFiles: 5,
     colorize: false,
   },
-  file: {
+  debug: {
     level: 'debug',
     filename: './logs/debug.log',
     handleExceptions: true,
@@ -19,7 +19,7 @@ const options = {
     maxFiles: 5,
     colorize: false,
   },
-  file: {
+  error: {
     level: 'error',
     filename: './logs/error.log',
     handleExceptions: true,
@@ -39,7 +39,9 @@ const options = {
 const logger = winston.createLogger({
   levels: winston.config.npm.levels,
   transports: [
-    new winston.transports.File(options.file),
+    new winston.transports.File(options.info),
+    new winston.transports.File(options.debug),
+    new winston.transports.File(options.error),
     new winston.transports.Console(options.console)
   ],
   exitOnError: false

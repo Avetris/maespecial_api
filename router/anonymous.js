@@ -19,6 +19,10 @@ router.get('/resources', async (req, res) => {
     }
 });
 
+router.get('/test', async (req, res) => {
+    res.json(new Date(req.body.date));
+});
+
 router.get('/posts', async (req, res) => {
     try {
         res.json(await post.getMultiple(false, req.query.pageSize, req.query.page));

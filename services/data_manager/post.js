@@ -2,6 +2,7 @@ const image_manager = require('./image_manager');
 const db = require('../db');
 const helper = require('../helper');
 const jsdom = require("jsdom");
+const logger = require('../../logger');
 
 async function getMultiple(showall, pageSize = process.env.LISTPERPAGE, page = 0)
 {
@@ -32,6 +33,7 @@ async function getUnique(id)
 
 async function create(post)
 {
+  logger.info(post.publishDate)
   const result = await db.query(
     'INSERT INTO post (title, description, image, content, publishDate) VALUES (?, ?, ?, ?, NOW())',
     ["tmp", "tmp", "tmp", "tmp"]
@@ -52,7 +54,6 @@ async function update(post)
     }
   })
   post.content = doc.window.document.body.innerHTML;
-  console.log(post)
   if (post.image.startsWith("data")) post.image = image_manager.uploadImage(post.image, `post/${post.id}`)
 
   return updateSQL(post.id, post);
