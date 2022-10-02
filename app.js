@@ -16,12 +16,7 @@ if (process.env.NODE_ENV == 'production') {
     app.unsubscribe(cors())
 } else {
     require('dotenv').config()
-    app.use(cors({
-        origin: [
-            "*",
-            "http://localhost:4100"
-        ], credentials: true
-    }));
+    app.use(cors({ origin: "*", credentials: true }));
 }
 
 app.use(fileUpload({
